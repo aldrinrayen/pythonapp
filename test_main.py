@@ -1,0 +1,14 @@
+import pytest
+from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+def test_read_root():
+    """Test the root endpoint"""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Hello, World! Welcome to FastAPI"}
+
+if __name__ == "__main__":
+    pytest.main([__file__])
