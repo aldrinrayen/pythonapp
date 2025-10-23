@@ -27,15 +27,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd pythonapp
           pip install -r requirements.txt
 
       - name: Run app
         run: |
-          cd pythonapp
           python main.py
 
       - name: Run tests
         run: |
-          cd pythonapp
           python -m pytest test_main.py -v
