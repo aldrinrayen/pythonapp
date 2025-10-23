@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "dev",]
+  pull_request:
+    branches: [ "main","master"  ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd pythonapp
+          pip install -r requirements.txt
+
+      - name: Run app
+        run: |
+          cd pythonapp
+          python main.py
+
+      - name: Run tests
+        run: |
+          cd pythonapp
+          python -m pytest test_main.py -v
